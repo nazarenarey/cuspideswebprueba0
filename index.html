@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cúspides — Escuela de montañismo en Patagonia. Te entrenamos, te formamos y te equipamos para llegar a la cima.">
+  <title>Cúspides — Escuela de montañismo</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500&family=Fustat:wght@500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===================== SECCIÓN 1: HERO ===================== -->
+  <section class="hero" id="inicio" aria-label="Presentación">
+    <!-- Header sobre el hero -->
+    <header class="site-header">
+      <a href="#inicio" class="site-header__logo" aria-label="Cúspides — Inicio">
+        <img src="assets/marca.png" alt="Cúspides" width="140" height="40">
+      </a>
+
+      <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-header__nav" id="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#preparacion">Preparación</a></li>
+          <li><a href="#cursos">Cursos</a></li>
+          <li><a href="#equipo">Equipo</a></li>
+          <li><a href="#preguntas">Preguntas</a></li>
+          <li><a href="#escuela">Escuela</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Capas parallax del hero -->
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero__layer hero__layer--back">
+        <img src="assets/fondohero.png" alt="">
+      </div>
+      <div class="hero__layer hero__layer--front">
+        <img src="assets/frentehero.png" alt="">
+      </div>
+      <!-- Degradado inferior hacia #F9F7F5 -->
+      <div class="hero__fade"></div>
+    </div>
+
+    <!-- Contenido textual del hero -->
+    <div class="hero__content">
+      <h1 class="hero__title">
+        <span class="hero__title-line hero__title-line--regular">SOÑAR NO ALCANZA,</span>
+        <span class="hero__title-line hero__title-line--medium">PREPARARSE SÍ</span>
+      </h1>
+      <p class="hero__subtitle">
+        Te entrenamos, te formamos y te equipamos para que llegar a la cima sea posible.
+      </p>
+      <a href="#nosotros" class="hero__cta">
+        <span class="hero__cta-text">Conocé más</span>
+        <img class="hero__cta-arrow" src="assets/flechacta.png" alt="" width="20" height="20">
+      </a>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- ===================== SECCIÓN 2: NOSOTROS ===================== -->
+    <!-- Wrapper extra alto para el scroll pinned + reveal -->
+    <div class="nosotros-pin" id="nosotros">
+      <section class="nosotros grid-section" aria-label="Nosotros">
+        <p class="nosotros__text" id="nosotros-text">
+          <span class="word">Con</span>
+          <span class="word">base</span>
+          <span class="word">en</span>
+          <span class="word">la</span>
+          <span class="word">Patagonia,</span>
+          <span class="word">nacimos</span>
+          <span class="word">de</span>
+          <span class="word">una</span>
+          <span class="word">convicción</span>
+          <span class="word">simple:</span>
+          <span class="word word--accent">la</span>
+          <span class="word word--accent">montaña</span>
+          <span class="word word--accent">no</span>
+          <span class="word word--accent">se</span>
+          <span class="word word--accent">improvisa.</span>
+          <span class="word">No</span>
+          <span class="word">guíamos</span>
+          <span class="word">turistas,</span>
+          <span class="word">formamos</span>
+          <span class="word">montañistas</span>
+          <span class="word">que</span>
+          <span class="word">entienden</span>
+          <span class="word">que</span>
+          <span class="word">la</span>
+          <span class="word">cumbre</span>
+          <span class="word">se</span>
+          <span class="word">gana</span>
+          <span class="word">antes</span>
+          <span class="word">de</span>
+          <span class="word">salir.</span>
+        </p>
+      </section>
+    </div>
+
+    <!-- ===================== SECCIÓN 3: PREPARACIÓN ===================== -->
+    <div class="preparacion-pin" id="preparacion">
+      <section class="preparacion grid-section" aria-label="Preparación">
+        <div class="preparacion__sticky">
+
+          <header class="preparacion__header">
+            <p class="preparacion__label">[ PREPARACIÓN ]</p>
+            <h2 class="preparacion__title">
+              <span>EL PROCESO PREVIO</span>
+              <span>A CADA ASCENSO</span>
+            </h2>
+            <p class="preparacion__intro">
+              Llevamos a cabo un sistema progresivo de evaluación, entrenamiento y formación diseñado para que desarrolles todas las capacidades necesarias.
+            </p>
+          </header>
+
+          <!-- Carrusel horizontal (scroll-jacking en desktop) -->
+          <div class="preparacion__carousel-viewport">
+            <div class="preparacion__carousel-track" id="carousel-track">
+
+              <article class="preparacion__card">
+                <p class="preparacion__card-num">01.</p>
+                <h3 class="preparacion__card-title">Evaluación inicial</h3>
+                <p class="preparacion__card-desc">Se evalúa tu condición física, historial de experiencia en montaña y tu objetivo real para saber de dónde partís.</p>
+              </article>
+
+              <article class="preparacion__card">
+                <p class="preparacion__card-num">02.</p>
+                <h3 class="preparacion__card-title">Preparación física</h3>
+                <p class="preparacion__card-desc">Meses de entrenamiento personalizado para que tu cuerpo esté listo para lo que la montaña va a exigir. Resistencia, fuerza y trabajo progresivo en altura, con seguimiento constante.</p>
+              </article>
+
+              <article class="preparacion__card">
+                <p class="preparacion__card-num">03.</p>
+                <h3 class="preparacion__card-title">Formación técnica</h3>
+                <p class="preparacion__card-desc">Aprendés a usar el equipo, a leer el terreno y a tomar decisiones en condiciones reales de montaña. Con instructores, en terreno, no en un aula.</p>
+              </article>
+
+              <article class="preparacion__card">
+                <p class="preparacion__card-num">04.</p>
+                <h3 class="preparacion__card-title">Salidas de práctica</h3>
+                <p class="preparacion__card-desc">Antes del objetivo final, salís a terreno real en condiciones controladas. Es donde se ajusta lo que falta, antes de que importe de verdad.</p>
+              </article>
+
+              <article class="preparacion__card">
+                <p class="preparacion__card-num">05.</p>
+                <h3 class="preparacion__card-title">Evaluación final</h3>
+                <p class="preparacion__card-desc">Cerramos el programa con una evaluación de tu nivel real. Acá termina nuestro trabajo — la expedición la decidís y organizás vos, ya preparado de verdad.</p>
+              </article>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- Anclas futuras (placeholder) -->
+  <div id="cursos" hidden></div>
+  <div id="equipo" hidden></div>
+  <div id="preguntas" hidden></div>
+  <div id="escuela" hidden></div>
+  <div id="contacto" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
