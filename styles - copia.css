@@ -1,0 +1,505 @@
+/* ============================================================
+   CÚSPIDES — Landing (Hero · Nosotros · Preparación)
+   Diseño base: 1440px × 1145px por sección
+   ============================================================ */
+
+:root {
+  /* Paleta */
+  --color-bg: #F9F7F5;
+  --color-text: #27221C;
+  --color-accent: #E74F26;
+  --color-muted: #A19484;
+
+  /* Tipografías */
+  --font-bricolage: "Bricolage Grotesque", sans-serif;
+  --font-fustat: "Fustat", sans-serif;
+
+  /* Altura de sección a 1440px → 1145px */
+  --section-height: clamp(36rem, 79.514vw, 71.5625rem);
+
+  /* Tipografía fluida: valor pt del diseño → vw a 1440px */
+  --text-hero-title: clamp(2.75rem, 7.708vw, 6.9375rem);   /* 111pt */
+  --text-hero-sub:   clamp(1rem, 1.875vw, 1.6875rem);      /* 27pt */
+  --text-nav:        clamp(0.65rem, 0.9vw, 0.875rem);
+  --text-nosotros:   clamp(1.375rem, 3.056vw, 2.75rem);    /* 44pt */
+  --text-prep-label: clamp(0.875rem, 1.806vw, 1.625rem);   /* 26pt */
+  --text-prep-title: clamp(2rem, 4.861vw, 4.375rem);       /* 70pt */
+  --text-prep-intro: clamp(1rem, 1.667vw, 1.5rem);         /* 24pt */
+  --text-card-num:   clamp(3.5rem, 9.514vw, 8.5625rem);    /* 137pt */
+  --text-card-title: clamp(1.75rem, 3.472vw, 3.125rem);    /* 50pt */
+  --text-card-desc:  clamp(1rem, 1.736vw, 1.5625rem);     /* 25pt */
+
+  /* Grilla */
+  --grid-size: clamp(2rem, 3.333vw, 3rem);
+  --grid-line: rgba(39, 34, 28, 0.1);
+
+  /* Layout */
+  --page-padding: clamp(1.25rem, 5vw, 4.5rem);
+  --card-gap: clamp(2rem, 6vw, 5rem);
+}
+
+/* ---------- Reset base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-fustat);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Textura de grilla difuminada (Nosotros + Preparación) ---------- */
+.grid-section {
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+
+  /* Máscara: visible al centro, difuminada hacia bordes */
+  -webkit-mask-image:
+    radial-gradient(ellipse 85% 70% at 50% 45%, #000 25%, transparent 78%),
+    linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  mask-image:
+    radial-gradient(ellipse 85% 70% at 50% 45%, #000 25%, transparent 78%),
+    linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+
+/* ============================================================
+   SECCIÓN 1 — HERO
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: max(var(--section-height), 100svh);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1rem, 2vw, 1.75rem) var(--page-padding);
+}
+
+.site-header__logo img {
+  width: clamp(6rem, 10vw, 8.75rem);
+  height: auto;
+}
+
+.site-header__nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header__nav a {
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: var(--text-nav);
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
+}
+
+.site-header__nav a:hover,
+.site-header__nav a:focus-visible {
+  color: var(--color-accent);
+}
+
+/* Separador " · " visual entre items (desktop) */
+.site-header__nav li:not(:last-child)::after {
+  content: "·";
+  margin-left: 0.75rem;
+  opacity: 0.45;
+}
+
+.site-header__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.site-header__toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-text);
+}
+
+/* Capas parallax */
+.hero__visual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.hero__layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+}
+
+.hero__layer--back  { z-index: 0; }
+.hero__layer--front { z-index: 1; }
+
+/* Degradado inferior → funde con Nosotros */
+.hero__fade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(8rem, 22vw, 18rem);
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(249, 247, 245, 0) 0%,
+    rgba(249, 247, 245, 0.55) 45%,
+    var(--color-bg) 100%
+  );
+  pointer-events: none;
+}
+
+/* Contenido hero */
+.hero__content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: clamp(6rem, 14vw, 10rem) var(--page-padding) clamp(4rem, 10vw, 8rem);
+  max-width: 90rem;
+}
+
+.hero__title {
+  margin: 0 0 clamp(1rem, 2vw, 1.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.hero__title-line {
+  display: block;
+  font-size: var(--text-hero-title);
+  color: var(--color-text);
+}
+
+.hero__title-line--regular { font-family: var(--font-bricolage); font-weight: 400; }
+.hero__title-line--medium  { font-family: var(--font-bricolage); font-weight: 500; }
+
+.hero__subtitle {
+  margin: 0 auto clamp(2rem, 4vw, 3rem);
+  max-width: 38ch;
+  font-family: var(--font-fustat);
+  font-weight: 500;
+  font-size: var(--text-hero-sub);
+  line-height: 1.35;
+}
+
+/* CTA pill */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #fff;
+  color: var(--color-text);
+  border-radius: 999px;
+  padding: clamp(0.75rem, 1.2vw, 1rem) clamp(1.75rem, 3vw, 2.5rem);
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  transition: transform 0.25s ease;
+}
+
+.hero__cta-text {
+  transition: transform 0.3s ease;
+}
+
+.hero__cta-arrow {
+  width: clamp(1rem, 1.2vw, 1.25rem);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.hero__cta:hover .hero__cta-text,
+.hero__cta:focus-visible .hero__cta-text {
+  transform: translateX(-6px);
+}
+
+.hero__cta:hover .hero__cta-arrow,
+.hero__cta:focus-visible .hero__cta-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================================
+   SECCIÓN 2 — NOSOTROS (pinned + reveal)
+   ============================================================ */
+.nosotros-pin {
+  /* Altura dinámica: la setea JS (viewport + scroll de reveal) */
+  position: relative;
+}
+
+.nosotros {
+  position: sticky;
+  top: 0;
+  min-height: var(--section-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3rem, 8vw, 6rem) var(--page-padding);
+}
+
+.nosotros__text {
+  margin: 0;
+  max-width: 52rem;
+  text-align: center;
+  font-family: var(--font-fustat);
+  font-weight: 500;
+  font-size: var(--text-nosotros);
+  line-height: 1.35;
+}
+
+.nosotros__text .word {
+  display: inline;
+  /* Color inicial; JS lo interpola */
+  color: var(--color-muted);
+}
+
+/* ============================================================
+   SECCIÓN 3 — PREPARACIÓN (scroll-jacking)
+   ============================================================ */
+.preparacion-pin {
+  position: relative;
+  /* Altura dinámica: la setea JS */
+}
+
+.preparacion {
+  position: sticky;
+  top: 0;
+  min-height: var(--section-height);
+  overflow: hidden;
+}
+
+.preparacion__sticky {
+  min-height: var(--section-height);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
+}
+
+.preparacion__header {
+  padding: 0 var(--page-padding);
+  max-width: 52rem;
+}
+
+.preparacion__label {
+  margin: 0 0 clamp(0.75rem, 1.5vw, 1.25rem);
+  font-family: var(--font-bricolage);
+  font-weight: 400;
+  font-size: var(--text-prep-label);
+  color: var(--color-accent);
+  letter-spacing: 0.04em;
+}
+
+.preparacion__title {
+  margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+  font-family: var(--font-bricolage);
+  font-weight: 500;
+  font-size: var(--text-prep-title);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.preparacion__title span { display: block; }
+
+.preparacion__intro {
+  margin: 0;
+  max-width: 42ch;
+  font-family: var(--font-fustat);
+  font-weight: 500;
+  font-size: var(--text-prep-intro);
+  line-height: 1.4;
+}
+
+/* Carrusel */
+.preparacion__carousel-viewport {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  overflow: hidden;
+}
+
+.preparacion__carousel-track {
+  display: flex;
+  gap: var(--card-gap);
+  padding-left: var(--page-padding);
+  will-change: transform;
+}
+
+/* Cards: solo texto, sin caja */
+.preparacion__card {
+  flex: 0 0 calc(100vw - (var(--page-padding) * 2));
+  max-width: 42rem;
+  text-align: center;
+  padding: 0 var(--page-padding);
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.preparacion__card-num {
+  margin: 0 0 clamp(0.5rem, 1vw, 1rem);
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: var(--text-card-num);
+  line-height: 1;
+  position: relative;
+  padding-bottom: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+/* Línea bajo el número */
+.preparacion__card-num::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: clamp(3rem, 8vw, 5rem);
+  height: 1px;
+  background: var(--color-text);
+  opacity: 0.35;
+}
+
+.preparacion__card-title {
+  margin: 0 0 clamp(0.75rem, 1.5vw, 1.25rem);
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: var(--text-card-title);
+  line-height: 1.1;
+}
+
+.preparacion__card-desc {
+  margin: 0 auto;
+  max-width: 36ch;
+  font-family: var(--font-fustat);
+  font-weight: 600;
+  font-size: var(--text-card-desc);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .site-header__toggle { display: flex; }
+
+  .site-header__nav {
+    position: absolute;
+    top: 100%;
+    right: var(--page-padding);
+    background: var(--color-bg);
+    border: 1px solid rgba(39, 34, 28, 0.12);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  }
+
+  .site-header__nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .site-header__nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  .site-header__nav li:not(:last-child)::after { content: none; }
+}
+
+/* Mobile: scroll-jacking off → carrusel horizontal manual */
+@media (max-width: 768px) {
+  .preparacion-pin {
+    height: auto !important;
+  }
+
+  .preparacion {
+    position: relative;
+    top: auto;
+  }
+
+  .preparacion__carousel-viewport {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+  }
+
+  .preparacion__carousel-track {
+    transform: none !important;
+    padding-right: var(--page-padding);
+  }
+
+  .preparacion__card {
+    scroll-snap-align: center;
+    flex: 0 0 85vw;
+  }
+}
+
+/* Preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .hero__layer,
+  .preparacion__carousel-track,
+  .hero__cta-text,
+  .hero__cta-arrow {
+    transition: none !important;
+  }
+}
